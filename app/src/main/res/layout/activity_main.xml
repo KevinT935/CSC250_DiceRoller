@@ -11,6 +11,7 @@
         android:id="@+id/rollsTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onRollButtonPressed"
         android:text="2 + 5 + 4 + 2"
         android:textColor="#FFEB3B"
         android:textSize="24sp" />
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:onClick="onRollButtonPressed"
         android:text="13"
         android:textColor="#6AAF4C"
         android:textSize="36sp" />
@@ -143,6 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="clearButtonPressed"
                     android:text="Clear" />
 
             </LinearLayout>
@@ -164,6 +167,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
+                    android:tag="D4"
                     app:srcCompat="@drawable/d4" />
 
                 <ImageButton
@@ -172,6 +176,7 @@
                     android:layout_height="65dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
+                    android:tag="D6"
                     app:srcCompat="@drawable/d6" />
 
             </LinearLayout>
@@ -187,6 +192,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
+                    android:tag="D8"
                     app:srcCompat="@drawable/d8" />
 
                 <ImageButton
@@ -195,6 +201,7 @@
                     android:layout_height="78dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
+                    android:tag="D10"
                     app:srcCompat="@drawable/d10" />
 
             </LinearLayout>
@@ -210,6 +217,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
+                    android:tag="D12"
                     app:srcCompat="@drawable/d12" />
 
                 <ImageButton
@@ -218,6 +226,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
+                    android:tag="D20 "
                     app:srcCompat="@drawable/d20" />
 
             </LinearLayout>
@@ -242,6 +251,7 @@
             android:id="@+id/selectedDieTV"
             android:layout_width="46dp"
             android:layout_height="wrap_content"
+            android:onClick="diceButtonPressed"
             android:text="D6"
             android:textColor="#4FFF3B"
             android:textSize="30sp" />
@@ -258,6 +268,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onRollButtonPressed"
             android:text="Roll" />
 
         <Button

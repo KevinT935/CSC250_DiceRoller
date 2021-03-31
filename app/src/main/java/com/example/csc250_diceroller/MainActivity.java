@@ -7,19 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Button zeroButton;
-    private Button oneButton;
-    private Button twoButton;
-    private Button threeButton;
-    private Button fourButton;
-    private Button fiveButton;
-    private Button sixButton;
-    private Button sevenButton;
-    private Button eightButton;
-    private Button nineButton;
     private TextView qtyTV;
+    private TextView selectedDieTV;
+    private String currentQtyText;
+    private TextView outputTV;
+    private TextView totalTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,60 +24,81 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.zeroButton = this.findViewById(R.id.ZeroB);
-        this.oneButton = this.findViewById(R.id.OneB);
-        this.twoButton = this.findViewById(R.id.TwoB);
-        this.threeButton = this.findViewById(R.id.ThreeB);
-        this.fourButton = this.findViewById(R.id.FourB);
-        this.fiveButton = this.findViewById(R.id.FiveB);
-        this.sixButton = this.findViewById(R.id.SixB);
-        this.sevenButton = this.findViewById(R.id.SevenB);
-        this.eightButton = this.findViewById(R.id.EightB);
-        this.nineButton = this.findViewById(R.id.NineB);
         this.qtyTV = this.findViewById(R.id.qtyTV);
+        this.selectedDieTV = this.findViewById(R.id.selectedDieTV);
+        this.qtyTV.setText("");
+        this.currentQtyText = "";
+        this.outputTV.setText("");
+        this.totalTV.setText("");
+    }
+
+    private String extractNumberOfSides(String diceType)
+    {
+     String answer = "";
+     for(int i = 1; i < diceType.length(); i++)
+     {
+         answer += diceType.charAt(i);
+     }
+     return answer;
+    }
+    public void onRollButtonPressed(View v)
+    {
+        int quantity = 1;
+        if (this.qtyTV.getText().toString().length() > 0)
+        {
+            quantity = Integer.parseInt(this.qtyTV.getText().toString());
+        }
+
+        String typeOfDice = this.selectedDieTV.getText().toString();
+        int numberOfSides = Integer.parseInt(typeOfDice.substring(1));
+        String qtyString = this.qtyTV.getText().toString();
+        int qtyInt = Integer.parseInt(qtyString);
+        int[] theRolls = new int[qtyInt];
+        int sum = 0;
+        String outputString = "";
+        String fullDiceString = this.selectedDieTV.getText().toString();
+        String trimmedDiceString = this.extractNumberOfSides(fullDiceString);
+        int numberOfSidesInt = Integer.parseInt(trimmedDiceString);
+        Random r = new Random();
+        for (int i = 0; i < theRolls.length; i++)
+        {
+            sum += theRolls[i];
+            if(outputString.length() == 0)
+            {
+                outputString += theRolls[i];
+            }
+            else
+            {
+                outputString += "+ " + theRolls[i];
+            }
+        }
+        this.outputTV.setText(outputString);
+        this.totalTV.setText("" + sum);
+
+
+    }
+
+    public void diceButtonPressed(View v)
+    {
+        this.selectedDieTV.setText(v.getTag().toString());
+    }
+
+    public void clearButtonPressed(View v)
+    {
+        this.currentQtyText = "";
+        this.qtyTV.setText(this.currentQtyText);
     }
 
     public void qtyButtonPressed(View v)
     {
-        if(v == this.zeroButton)
+        Button b = (Button)v;
+
+        if(this.currentQtyText.length() == 0 && b.getText().equals("0"))
         {
-            this.qtyTV.setText("0");
+            return;
         }
-        if(v == this.oneButton)
-        {
-            this.qtyTV.setText("1");
-        }
-        if(v == this.twoButton)
-        {
-            this.qtyTV.setText("2");
-        }
-        if(v == this.threeButton)
-        {
-            this.qtyTV.setText("3");
-        }
-        if(v == this.fourButton)
-        {
-            this.qtyTV.setText("4");
-        }
-        if(v == this.fiveButton)
-        {
-            this.qtyTV.setText("5");
-        }
-        if(v == this.sixButton)
-        {
-            this.qtyTV.setText("6");
-        }
-        if(v == this.sevenButton)
-        {
-            this.qtyTV.setText("7");
-        }
-        if(v == this.eightButton)
-        {
-            this.qtyTV.setText("8");
-        }
-        if(v == this.nineButton)
-        {
-            this.qtyTV.setText("9");
-        }
+        this.currentQtyText += b.getText();
+        this.qtyTV.setText(this.currentQtyText);
+
     }
 }
